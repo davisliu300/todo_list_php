@@ -40,24 +40,4 @@ details:todoadd.find("textarea[name=details]").val(),
         });
             
     });
-    $("button").click(function(){  //add a click handler to our data display button
-        $.ajax(
-        {
-            url: 'actions/remove.php',  //get our data from the get.php file
-            dataType: 'json', //expect json data back from get.php
-            cache: false, //do not cache the result
-            method: 'POST',  //use the post method
-            success: function(data){  //do something when we get data back
-			console.log("data : ", data);
-                if(data.success)
-                {
-				console.log("inside data.sucess ");
-                    $("#todo-display > .display_container").remove(); //take the html object of the data object, and put it into the display container
-				
-                }
-            }
-        });
-            
-    });	
-	
 });

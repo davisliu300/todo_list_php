@@ -1,7 +1,20 @@
 <?php 
-//include functions.php file
-?>
-<!doctype html>
+$pages = [
+	'index' => ['pageUrl'=>'index.php', 'default'=>true],
+    'Register'=>['pageUrl'=>'register.php'],
+    'Login'=>['pageUrl'=>'login.php'],
+    'About Us'=>['pageUrl'=>'about-us.php'],
+    'Account'=>['pageUrl'=>'account.php']
+];
+// print("GET BEFORE SET");print_r($_GET);
+if(!isset($_GET['page']))
+{
+    $_GET['page'] = 'home.php';
+}
+
+?><?php 
+	include ('includes/functions.php');
+?><!doctype html>
 
 <html>
 <head>
@@ -17,15 +30,15 @@
 <body>
 
 <?php 
-//include header.php
+	include ('includes/header.php');
 ?>
     <main id="main-content">
         <section id="todo-display">
             <button id="display_refresh" type="button" class="glyphicon glyphicon-refresh"></button>
-            <div class="display_container"></div>
+            <div class="display_container"><?php // include('actions/get.php');?></div>
         </section>
         <section id="todo-add">
-            <form>
+            <form method = "POST"> 
                 <input type="text" name="title" placeholder="Task Title">
                 <input type="text" name="date" placeholder="Task Due">
                 <textarea name="details" placeholder="Task"></textarea>
@@ -33,9 +46,19 @@
             </form>
         </section>
         
+<!-- BELOW is the PHP code for getting a page from the array -->
+		 <?php 
+            if(file_exists('pages/'.$_GET['page'])){
+                include('pages/'.$_POST['page']);
+            }
+            else{
+                include('pages/404.php');
+            }
+           ?>
+
     </main>
 <?php 
-//include footer.php
+	include ('includes/footer.php');
 ?>
 </body>
 </html>
